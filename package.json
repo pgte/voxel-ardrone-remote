@@ -1,0 +1,22 @@
+{
+  "name": "voxel-ardrone-remote",
+  "version": "0.0.1",
+  "description": " Websocket-controlled Voxel ARDrone",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pgte/voxel-ardrone-remote.git"
+  },
+  "author": "Pedro Teixeira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pgte/voxel-ardrone-remote/issues"
+  },
+  "homepage": "https://github.com/pgte/voxel-ardrone-remote",
+  "dependencies": {
+    "express": "^4.12.3"
+  }
+}
