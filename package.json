@@ -4,7 +4,8 @@
   "description": " Websocket-controlled Voxel ARDrone",
   "main": "index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "browserify": "browserify browser/remote.js > browser/remote-bundled.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,12 @@
   },
   "homepage": "https://github.com/pgte/voxel-ardrone-remote",
   "dependencies": {
-    "express": "^4.12.3"
+    "express": "^4.12.3",
+    "reconnect-core": "^1.0.0",
+    "rpc-stream": "^2.1.1",
+    "websocket-stream": "^1.5.0"
+  },
+  "devDependencies": {
+    "browserify": "^10.1.0"
   }
 }
