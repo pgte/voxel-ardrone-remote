@@ -11,11 +11,21 @@ var webserver = exports.webserver = app.listen(webPort, function() {
 require('./websocket');
 
 
-// TCP server
+// TCP command server
 
 var server = require('./net');
-var port = Number(process.env.WEB_PORT) || 3001;
+var port = Number(process.env.COMMAND_PORT) || 3001;
 
 server.listen(port, function() {
-  console.log('TCP Server listening on %j', server.address());
+  console.log('TCP Command Server listening on %j', server.address());
+});
+
+
+// Video server
+
+var video = require('./video');
+var videoPort = Number(process.env.VIDEO_PORT) || 3002;
+
+video.server.listen(videoPort, function() {
+  console.log('TCP Video Server listening on %j', video.server.address());
 });
