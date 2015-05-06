@@ -11,11 +11,25 @@ function handle(stream) {
   stream.pipe(m).pipe(stream);
   var commands = m.createStream('commands')
   commands.pipe(hub.out, {end: false}).pipe(commands);
+
+  stream.once('end', function() {
+    hub.out.unpipe(commands);
+  });
+
+  m.on('error', function(err) {
+    console.error(err.message || err);
+    m.destroy();
+  });
+
+  stream.on('error', function(err) {
+    console.error(err.message || err);
+    stream.destroy();
+  });
 }
 
 function handleStream(stream) {
   if (stream.meta == 'video') {
     console.log('*** I have video stream ***');
-    stream.pipe(video.hub.inn, {end: false}).pipe(stream);
+    stream.pipe(video.hub.inn, {end: false});
   }
 }

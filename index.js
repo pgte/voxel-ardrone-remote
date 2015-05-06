@@ -29,3 +29,12 @@ var videoPort = Number(process.env.VIDEO_PORT) || 3002;
 video.server.listen(videoPort, function() {
   console.log('TCP Video Server listening on %j', video.server.address());
 });
+
+
+// PNG Server
+
+var pngServer = require('./png');
+pngServer.listen(Number(process.env.PNG_PORT) || 3003, function() {
+  console.log('PNG Video Server listening on %j', pngServer.address());
+});
+

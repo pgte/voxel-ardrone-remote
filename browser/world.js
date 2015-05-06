@@ -42100,7 +42100,8 @@ Game.prototype.createControls = function(camera) {
 
 Game.prototype.createRenderer = function() {
   this.renderer = new THREE.WebGLRenderer({
-    antialias: true
+    antialias: true,
+    preserveDrawingBuffer: true
   })
   this.renderer.setSize(this.width, this.height)
   this.renderer.setClearColorHex(0xBFD1E5, 1.0)

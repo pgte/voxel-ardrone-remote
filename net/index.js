@@ -9,6 +9,10 @@ server.on('connection', function(conn) {
   conn.setEncoding('utf8');
   conn.pipe(hub.in, {end: false}).pipe(conn);
 
+  conn.once('end', function() {
+    hub.in.unpipe(conn);
+  });
+
   conn.on('error', function(err) {
     conn.destroy();
   });

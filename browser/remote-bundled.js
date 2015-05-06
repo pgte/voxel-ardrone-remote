@@ -31,6 +31,12 @@ var reconnect = inject(function() {
 
 var re = reconnect({}, function(stream) {
   console.log('client connected');
+
+  stream.on('error', function(err) {
+    console.log(err.message || err);
+    stream.destroy();
+  });
+
   var m = MuxDemux(function(stream) {
     if (stream.meta == 'commands') {
       var server = rpc(service);
@@ -38,21 +44,39 @@ var re = reconnect({}, function(stream) {
     }
   });
 
+  m.on('error', function(err) {
+    console.log(err.message || err);
+    m.destroy();
+  });
+
   stream.pipe(m).pipe(stream);
 
   // video
 
   var video = m.createWriteStream('video');
-  drone.createPngStream().pipe(video);
+  var s = drone.createPngStream();
+  s.resume();
+  //s.pipe(video);
 
-  stream.on('error', function(err) {
-    console.log(err.message || err);
-    stream.destroy();
-  });
+  var ended = false;
+  var frame;
 
-  m.on('error', function(err) {
-    console.log(err.message || err);
-    m.destroy();
+  function onFrame(_frame) {
+    frame = _frame;
+  }
+  s.on('data', onFrame);
+
+  var interval = setInterval(function() {
+    if (frame) {
+      // console.log(frame);
+      video.write(frame);
+    }
+  }, 5e2);
+
+  stream.once('finish', function() {
+    console.log('websocket stream finished');
+    clearInterval(interval);
+    s.removeListener('data', onFrame);
   });
 });
 
