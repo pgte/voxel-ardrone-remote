@@ -19,6 +19,7 @@
   "homepage": "https://github.com/pgte/voxel-ardrone-remote",
   "dependencies": {
     "express": "^4.12.3",
+    "mux-demux": "^3.7.9",
     "reconnect-core": "^1.0.0",
     "rpc-stream": "^2.1.1",
     "websocket-stream": "^1.5.0"

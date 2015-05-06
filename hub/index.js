@@ -1,18 +1,10 @@
 var Duplex = require('stream').Duplex;
 
-var inn = exports.in = new Duplex();
-var out = exports.out = new Duplex();
-
-out.on('data', function(d) {
-  console.log('=> ', d);
-});
-
-inn.on('data', function(d) {
-  console.log('<= ', d);
-});
+var inn = exports.in = new Duplex({encoding: 'utf8', decodeStrings: false});
+var out = exports.out = new Duplex({encoding: 'utf8', decodeStrings: false});
 
 inn._write = function(chunk, encoding, cb) {
-  console.log('IN', chunk);
+  console.log('IN', chunk.toString());
   out.push(chunk);
   cb();
 };
