@@ -14,6 +14,7 @@ server.on('connection', function(conn) {
   });
 
   conn.on('error', function(err) {
+    console.error(err.message || err);
     conn.destroy();
   });
 });
