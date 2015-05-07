@@ -30,6 +30,7 @@ Open the browser in this URL:
 
 (works better on Chrome)
 
+![voxel drone](images/voxel-drone_and_pgte_voxel-ardrone-remote.png)
 
 ## TCP Server
 
